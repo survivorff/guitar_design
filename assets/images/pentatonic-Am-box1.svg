@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 346" font-family="Helvetica,Arial,sans-serif">
+<rect width="310" height="346" fill="#ffffff"/>
+<text x="155.0" y="26" font-size="17" font-weight="bold" text-anchor="middle" fill="#2b2b2b">A 小调五声 · 第一把位(5–8 品)</text>
+<line x1="56" y1="56" x2="280" y2="56" stroke="#2b2b2b" stroke-width="2.00"/>
+<line x1="56" y1="102" x2="280" y2="102" stroke="#2b2b2b" stroke-width="1.78"/>
+<line x1="56" y1="148" x2="280" y2="148" stroke="#2b2b2b" stroke-width="1.56"/>
+<line x1="56" y1="194" x2="280" y2="194" stroke="#2b2b2b" stroke-width="1.34"/>
+<line x1="56" y1="240" x2="280" y2="240" stroke="#2b2b2b" stroke-width="1.12"/>
+<line x1="56" y1="286" x2="280" y2="286" stroke="#2b2b2b" stroke-width="0.90"/>
+<line x1="56" y1="56" x2="56" y2="286" stroke="#2b2b2b" stroke-width="1.4"/>
+<text x="84.0" y="310.0" font-size="12" text-anchor="middle" fill="#8b8b8b">5</text>
+<line x1="112" y1="56" x2="112" y2="286" stroke="#2b2b2b" stroke-width="1.4"/>
+<text x="140.0" y="310.0" font-size="12" text-anchor="middle" fill="#8b8b8b">6</text>
+<line x1="168" y1="56" x2="168" y2="286" stroke="#2b2b2b" stroke-width="1.4"/>
+<text x="196.0" y="310.0" font-size="12" text-anchor="middle" fill="#8b8b8b">7</text>
+<line x1="224" y1="56" x2="224" y2="286" stroke="#2b2b2b" stroke-width="1.4"/>
+<text x="252.0" y="310.0" font-size="12" text-anchor="middle" fill="#8b8b8b">8</text>
+<line x1="280" y1="56" x2="280" y2="286" stroke="#2b2b2b" stroke-width="1.4"/>
+<text x="40" y="60.0" font-size="12" text-anchor="middle" fill="#2b2b2b">E</text>
+<text x="40" y="106.0" font-size="12" text-anchor="middle" fill="#2b2b2b">A</text>
+<text x="40" y="152.0" font-size="12" text-anchor="middle" fill="#2b2b2b">D</text>
+<text x="40" y="198.0" font-size="12" text-anchor="middle" fill="#2b2b2b">G</text>
+<text x="40" y="244.0" font-size="12" text-anchor="middle" fill="#2b2b2b">B</text>
+<text x="40" y="290.0" font-size="12" text-anchor="middle" fill="#2b2b2b">e</text>
+<circle cx="84.0" cy="56.0" r="13" fill="#d1242f"/>
+<text x="84.0" y="60.0" font-size="11" font-weight="bold" text-anchor="middle" fill="#fff">A</text>
+<circle cx="252.0" cy="56.0" r="13" fill="#1f6feb"/>
+<circle cx="84.0" cy="102.0" r="13" fill="#1f6feb"/>
+<circle cx="196.0" cy="102.0" r="13" fill="#d1242f"/>
+<text x="196.0" y="106.0" font-size="11" font-weight="bold" text-anchor="middle" fill="#fff">A</text>
+<circle cx="84.0" cy="148.0" r="13" fill="#1f6feb"/>
+<circle cx="196.0" cy="148.0" r="13" fill="#1f6feb"/>
+<circle cx="84.0" cy="194.0" r="13" fill="#1f6feb"/>
+<circle cx="196.0" cy="194.0" r="13" fill="#1f6feb"/>
+<circle cx="84.0" cy="240.0" r="13" fill="#1f6feb"/>
+<circle cx="252.0" cy="240.0" r="13" fill="#1f6feb"/>
+<circle cx="84.0" cy="286.0" r="13" fill="#d1242f"/>
+<text x="84.0" y="290.0" font-size="11" font-weight="bold" text-anchor="middle" fill="#fff">A</text>
+<circle cx="252.0" cy="286.0" r="13" fill="#1f6feb"/>
+<text x="56" y="332" font-size="11" fill="#8b8b8b">红=根音 A  蓝=音阶其他音</text>
+</svg>

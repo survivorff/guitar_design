@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 360" font-family="Helvetica,Arial,sans-serif">
+<rect width="460" height="360" fill="#ffffff"/>
+<text x="230.0" y="26" font-size="17" font-weight="bold" text-anchor="middle" fill="#2b2b2b">民谣/电吉他 基本坐姿(示意)</text>
+<rect x="150" y="250" width="120" height="12" fill="#888"/>
+<rect x="155" y="262" width="8" height="70" fill="#888"/>
+<rect x="258" y="262" width="8" height="70" fill="#888"/>
+<line x1="210" y1="120" x2="210" y2="250" stroke="#3a6ea5" stroke-width="26" stroke-linecap="round"/>
+<circle cx="210" cy="100" r="22" fill="#e8b88a"/>
+<line x1="210" y1="248" x2="300" y2="250" stroke="#3a6ea5" stroke-width="22" stroke-linecap="round"/>
+<line x1="300" y1="250" x2="305" y2="332" stroke="#3a6ea5" stroke-width="18" stroke-linecap="round"/>
+<ellipse cx="250" cy="225" rx="46" ry="40" fill="#e8c79a" stroke="#9c6b2f" stroke-width="3"/>
+<circle cx="250" cy="225" r="14" fill="#3b2a16"/>
+<rect x="95" y="150" width="150" height="16" rx="4" fill="#5a3d22" transform="rotate(-12 245 158)"/>
+<line x1="200" y1="150" x2="120" y2="172" stroke="#e8b88a" stroke-width="13" stroke-linecap="round"/>
+<line x1="215" y1="150" x2="265" y2="205" stroke="#e8b88a" stroke-width="13" stroke-linecap="round"/>
+<text x="380" y="100" font-size="12" fill="#d1242f" text-anchor="start">• 背挺直,不驼背</text>
+<text x="380" y="150" font-size="12" fill="#d1242f" text-anchor="start">• 琴颈略上扬</text>
+<text x="385" y="205" font-size="12" fill="#d1242f" text-anchor="start">• 右小臂搭琴身上缘</text>
+<text x="380" y="250" font-size="12" fill="#d1242f" text-anchor="start">• 琴腰架右大腿</text>
+<text x="110" y="130" font-size="12" fill="#d1242f" text-anchor="end">• 左手拇指在颈背</text>
+<text x="95" y="300" font-size="12" fill="#d1242f" text-anchor="end">• 肩膀放松下沉</text>
+<text x="230.0" y="352" font-size="11" text-anchor="middle" fill="#8b8b8b">示意图,真实姿势请配合视频参考(见 持琴与姿势.md 末尾链接)</text>
+</svg>

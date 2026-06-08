@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎸 吉他交互练习台</title>
+<style>
+  :root { --accent:#1f6feb; --bg:#0d1117; --panel:#161b22; --text:#e6edf3; --muted:#8b949e; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:-apple-system,"PingFang SC",Helvetica,Arial,sans-serif;
+         background:var(--bg); color:var(--text); }
+  header { padding:18px 22px; border-bottom:1px solid #30363d; }
+  header h1 { margin:0; font-size:20px; }
+  header p { margin:6px 0 0; color:var(--muted); font-size:13px; }
+  .layout { display:flex; gap:0; min-height:calc(100vh - 78px); }
+  .sidebar { width:230px; background:var(--panel); border-right:1px solid #30363d;
+             padding:14px; overflow-y:auto; }
+  .sidebar h3 { font-size:13px; color:var(--muted); text-transform:uppercase;
+                margin:14px 0 8px; letter-spacing:.05em; }
+  .song-btn { display:block; width:100%; text-align:left; background:transparent;
+              color:var(--text); border:1px solid #30363d; border-radius:8px;
+              padding:9px 11px; margin-bottom:7px; cursor:pointer; font-size:13px; }
+  .song-btn:hover { border-color:var(--accent); }
+  .song-btn.active { background:var(--accent); border-color:var(--accent); }
+  .main { flex:1; display:flex; flex-direction:column; }
+  .controls { padding:12px 18px; background:var(--panel); border-bottom:1px solid #30363d;
+              display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  button.ctrl { background:var(--accent); color:#fff; border:none; border-radius:8px;
+                padding:9px 16px; cursor:pointer; font-size:14px; font-weight:600; }
+  button.ctrl.secondary { background:#21262d; border:1px solid #30363d; }
+  button.ctrl:disabled { opacity:.4; cursor:not-allowed; }
+  .speed { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted); }
+  .speed input { width:130px; }
+  label.toggle { font-size:13px; color:var(--muted); display:flex; align-items:center; gap:5px; }
+  #score { flex:1; overflow:auto; background:#fff; }
+  .at-wrap { padding:10px; }
+  .hint { padding:10px 18px; color:var(--muted); font-size:12px; background:var(--panel);
+          border-top:1px solid #30363d; }
+  .status { font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>🎸 吉他交互练习台</h1>
+  <p>看谱 · 播放 · 变速 · 跟练 —— 选一首练习曲,点播放并调慢速度跟着弹。基于 alphaTab(需联网加载一次)。</p>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h3>入门练习曲</h3>
+    <div id="songList"></div>
+    <h3>说明</h3>
+    <p style="font-size:12px;color:var(--muted);line-height:1.6;">
+      乐谱内容用 alphaTex 文本写成,易于编辑。想加自己的曲子?
+      编辑本文件里的 <code>SONGS</code> 即可。完整软件指南见
+      <code>13-资源与社区/乐谱与练习软件.md</code>。
+    </p>
+  </aside>
+
+  <div class="main">
+    <div class="controls">
+      <button class="ctrl" id="play">▶ 播放</button>
+      <button class="ctrl secondary" id="stop">■ 停止</button>
+      <div class="speed">
+        速度 <input type="range" id="speed" min="0.25" max="1.5" step="0.05" value="0.6">
+        <span id="speedVal">60%</span>
+      </div>
+      <label class="toggle"><input type="checkbox" id="metronome"> 节拍器</label>
+      <label class="toggle"><input type="checkbox" id="loop"> 循环</label>
+      <span class="status" id="status">加载中…</span>
+    </div>
+    <div id="score"><div class="at-wrap"></div></div>
+    <div class="hint">
+      提示:先用 40–60% 速度跟练,弹对了再逐步加速。打开"节拍器"对齐节奏,打开"循环"反复磨难点。
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@coderline/alphatab@1.5.0/dist/alphaTab.min.js"></script>
+<script>
+// ---- 练习曲库(alphaTex 记谱)----
+// 语法速览:\title 标题  \tempo 速度  音符: 品.弦  时值用 :4=四分 :8=八分
+// 例: 3.3 = 3弦3品; 0.1 = 1弦空弦; | 小节线
+const SONGS = {
+  "小星星": `\\title "小星星" \\tempo 100 .
+  :4 1.2 1.2 3.1 3.1 | 5.1 5.1 3.1 :2 r |
+  :4 1.1 1.1 0.1 0.1 | 3.2 3.2 :2 1.2 |
+  :4 3.1 3.1 1.1 1.1 | 0.1 0.1 :2 3.2 |
+  :4 3.1 3.1 1.1 1.1 | 0.1 0.1 :2 3.2 |
+  :4 1.2 1.2 3.1 3.1 | 5.1 5.1 3.1 :2 r |
+  :4 1.1 1.1 0.1 0.1 | 3.2 3.2 :2 1.2 |`,
+
+  "欢乐颂": `\\title "欢乐颂(贝多芬)" \\tempo 100 .
+  :4 0.1 0.1 1.1 3.1 | 3.1 1.1 0.1 3.2 |
+  :4 1.2 1.2 3.2 0.1 | 0.1 3.2 :2 3.2 |
+  :4 0.1 0.1 1.1 3.1 | 3.1 1.1 0.1 3.2 |
+  :4 1.2 1.2 3.2 0.1 | 3.2 1.2 :2 1.2 |`,
+
+  "A小调五声音阶": `\\title "A小调五声 第一把位" \\tempo 80 .
+  :8 5.6 8.6 5.5 7.5 5.4 7.4 5.3 7.3 |
+  5.2 8.2 5.1 8.1 8.1 5.1 8.2 5.2 |
+  7.3 5.3 7.4 5.4 7.5 5.5 8.6 5.6 |`,
+
+  "12小节布鲁斯伴奏(A)": `\\title "12-Bar Blues in A (shuffle)" \\tempo 100 .
+  :8 (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) |
+  (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) |
+  (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) |
+  (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) |
+  (0.4 2.3) (0.4 2.3) (0.4 4.3) (0.4 4.3) (0.4 2.3) (0.4 2.3) (0.4 4.3) (0.4 4.3) |
+  (0.4 2.3) (0.4 2.3) (0.4 4.3) (0.4 4.3) (0.4 2.3) (0.4 2.3) (0.4 4.3) (0.4 4.3) |
+  (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) |
+  (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) |
+  (0.6 2.5) (0.6 2.5) (0.6 4.5) (0.6 4.5) (0.6 2.5) (0.6 2.5) (0.6 4.5) (0.6 4.5) |
+  (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) |
+  (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) (0.5 2.4) (0.5 2.4) (0.5 4.4) (0.5 4.4) |
+  (0.6 2.5) (0.6 2.5) (0.6 4.5) (0.6 4.5) (0.6 2.5) (0.6 2.5) (0.6 4.5) (0.6 4.5) |`
+};
+
+const el = (id) => document.getElementById(id);
+const statusEl = el("status");
+let api;
+
+function initAlphaTab() {
+  const wrap = document.querySelector(".at-wrap");
+  api = new alphaTab.AlphaTabApi(wrap, {
+    core: { engine: "svg", logLevel: 0,
+            fontDirectory: "https://cdn.jsdelivr.net/npm/@coderline/alphatab@1.5.0/dist/font/" },
+    display: { scale: 1.0 },
+    player: {
+      enablePlayer: true,
+      enableCursor: true,
+      enableUserInteraction: true,
+      soundFont: "https://cdn.jsdelivr.net/npm/@coderline/alphatab@1.5.0/dist/soundfont/sonivox.sf2"
+    }
+  });
+
+  api.soundFontLoaded.on(() => { statusEl.textContent = "就绪 ✓"; });
+  api.playerReady.on(() => { el("play").disabled = false; });
+  api.renderStarted.on(() => { statusEl.textContent = "渲染中…"; });
+  api.renderFinished.on(() => { statusEl.textContent = "就绪 ✓"; });
+
+  // 控制
+  el("play").addEventListener("click", () => api.playPause());
+  el("stop").addEventListener("click", () => api.stop());
+  el("speed").addEventListener("input", (e) => {
+    const v = parseFloat(e.target.value);
+    el("speedVal").textContent = Math.round(v * 100) + "%";
+    api.playbackSpeed = v;
+  });
+  el("metronome").addEventListener("change", (e) => {
+    api.metronomeVolume = e.target.checked ? 1 : 0;
+  });
+  el("loop").addEventListener("change", (e) => { api.isLooping = e.target.checked; });
+
+  api.playbackSpeed = 0.6;
+}
+
+function loadSong(name) {
+  api.tex(SONGS[name]);
+  document.querySelectorAll(".song-btn").forEach(b =>
+    b.classList.toggle("active", b.textContent === name));
+}
+
+function buildList() {
+  const list = el("songList");
+  Object.keys(SONGS).forEach(name => {
+    const b = document.createElement("button");
+    b.className = "song-btn";
+    b.textContent = name;
+    b.onclick = () => loadSong(name);
+    list.appendChild(b);
+  });
+}
+
+window.addEventListener("load", () => {
+  if (typeof alphaTab === "undefined") {
+    statusEl.textContent = "⚠ alphaTab 加载失败,请检查网络连接";
+    return;
+  }
+  el("play").disabled = true;
+  initAlphaTab();
+  buildList();
+  loadSong(Object.keys(SONGS)[0]);
+});
+</script>
+</body>
+</html>

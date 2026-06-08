@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" font-family="Helvetica,Arial,sans-serif">
+<rect width="760" height="320" fill="#ffffff"/>
+<text x="380.0" y="26" font-size="18" font-weight="bold" text-anchor="middle" fill="#2b2b2b">原声吉他部件示意图</text>
+<ellipse cx="600" cy="180" rx="110" ry="95" fill="#e8c79a" stroke="#9c6b2f" stroke-width="3"/>
+<ellipse cx="520" cy="180" rx="70" ry="78" fill="#e8c79a" stroke="#9c6b2f" stroke-width="3"/>
+<rect x="450" y="150" width="160" height="60" fill="#e8c79a"/>
+<circle cx="560" cy="180" r="34" fill="#3b2a16"/>
+<circle cx="560" cy="180" r="34" fill="none" stroke="#9c6b2f" stroke-width="3"/>
+<rect x="600" y="195" width="44" height="14" rx="3" fill="#3b2a16"/>
+<rect x="150" y="166" width="330" height="28" fill="#5a3d22"/>
+<line x1="180" y1="166" x2="180" y2="194" stroke="#cfcfcf" stroke-width="2"/>
+<line x1="216" y1="166" x2="216" y2="194" stroke="#cfcfcf" stroke-width="2"/>
+<line x1="252" y1="166" x2="252" y2="194" stroke="#cfcfcf" stroke-width="2"/>
+<line x1="288" y1="166" x2="288" y2="194" stroke="#cfcfcf" stroke-width="2"/>
+<line x1="324" y1="166" x2="324" y2="194" stroke="#cfcfcf" stroke-width="2"/>
+<line x1="360" y1="166" x2="360" y2="194" stroke="#cfcfcf" stroke-width="2"/>
+<line x1="396" y1="166" x2="396" y2="194" stroke="#cfcfcf" stroke-width="2"/>
+<line x1="432" y1="166" x2="432" y2="194" stroke="#cfcfcf" stroke-width="2"/>
+<rect x="110" y="150" width="48" height="60" rx="6" fill="#5a3d22"/>
+<circle cx="120" cy="162" r="4" fill="#d9d9d9"/>
+<circle cx="148" cy="162" r="4" fill="#d9d9d9"/>
+<circle cx="120" cy="178" r="4" fill="#d9d9d9"/>
+<circle cx="148" cy="178" r="4" fill="#d9d9d9"/>
+<circle cx="120" cy="194" r="4" fill="#d9d9d9"/>
+<circle cx="148" cy="194" r="4" fill="#d9d9d9"/>
+<line x1="158" y1="169.0" x2="622" y2="200" stroke="#bbb" stroke-width="0.8"/>
+<line x1="158" y1="173.6" x2="622" y2="200" stroke="#bbb" stroke-width="0.8"/>
+<line x1="158" y1="178.2" x2="622" y2="200" stroke="#bbb" stroke-width="0.8"/>
+<line x1="158" y1="182.8" x2="622" y2="200" stroke="#bbb" stroke-width="0.8"/>
+<line x1="158" y1="187.4" x2="622" y2="200" stroke="#bbb" stroke-width="0.8"/>
+<line x1="158" y1="192.0" x2="622" y2="200" stroke="#bbb" stroke-width="0.8"/>
+<line x1="134" y1="130" x2="110" y2="150" stroke="#8b8b8b" stroke-width="1"/>
+<text x="134" y="126" font-size="13" text-anchor="middle" fill="#2b2b2b">琴头 Headstock</text>
+<line x1="134" y1="240" x2="130" y2="178" stroke="#8b8b8b" stroke-width="1"/>
+<text x="134" y="236" font-size="13" text-anchor="middle" fill="#2b2b2b">弦钮 Tuners</text>
+<line x1="250" y1="130" x2="300" y2="166" stroke="#8b8b8b" stroke-width="1"/>
+<text x="250" y="126" font-size="13" text-anchor="middle" fill="#2b2b2b">琴颈/指板 Neck</text>
+<line x1="250" y1="240" x2="250" y2="194" stroke="#8b8b8b" stroke-width="1"/>
+<text x="250" y="236" font-size="13" text-anchor="middle" fill="#2b2b2b">品丝 Frets</text>
+<line x1="560" y1="110" x2="560" y2="146" stroke="#8b8b8b" stroke-width="1"/>
+<text x="560" y="106" font-size="13" text-anchor="middle" fill="#2b2b2b">音孔 Soundhole</text>
+<line x1="660" y1="110" x2="660" y2="150" stroke="#8b8b8b" stroke-width="1"/>
+<text x="660" y="106" font-size="13" text-anchor="middle" fill="#2b2b2b">琴身 Body</text>
+<line x1="640" y1="250" x2="622" y2="205" stroke="#8b8b8b" stroke-width="1"/>
+<text x="640" y="246" font-size="13" text-anchor="middle" fill="#2b2b2b">琴桥 Bridge</text>
+</svg>
