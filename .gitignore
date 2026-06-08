@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*~
+
+# 个人录音 / 临时文件(练习时产生的)
+*.wav
+*.mp3
+*.m4a
+*.aif
+*.aiff
+tmp/
+temp/
