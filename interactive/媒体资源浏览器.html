@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎬 吉他媒体资源浏览器</title>
+<style>
+  :root { --accent:#1f6feb; --bg:#0d1117; --panel:#161b22; --text:#e6edf3; --muted:#8b949e; --border:#30363d; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,"PingFang SC",Helvetica,Arial,sans-serif;
+         background:var(--bg); color:var(--text); line-height:1.5; }
+  header { padding:20px 24px; border-bottom:1px solid var(--border); }
+  header h1 { margin:0; font-size:21px; }
+  header p { margin:6px 0 0; color:var(--muted); font-size:13px; }
+  .container { max-width:1000px; margin:0 auto; padding:22px; }
+
+  .search-box { background:var(--panel); border:1px solid var(--border); border-radius:12px;
+                padding:18px; margin-bottom:22px; }
+  .search-box h2 { margin:0 0 12px; font-size:16px; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+  input[type=text], select { background:#0d1117; color:var(--text); border:1px solid var(--border);
+         border-radius:8px; padding:10px 12px; font-size:14px; }
+  input[type=text] { flex:1; min-width:200px; }
+  .platform-btns { display:flex; gap:8px; flex-wrap:wrap; }
+  .pbtn { background:var(--accent); color:#fff; border:none; border-radius:8px; padding:10px 16px;
+          cursor:pointer; font-size:14px; font-weight:600; text-decoration:none; display:inline-block; }
+  .pbtn.bili { background:#fb7299; }
+  .pbtn.sp { background:#1db954; }
+  .pbtn.secondary { background:#21262d; border:1px solid var(--border); }
+
+  .chips { display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; }
+  .chip { background:#21262d; border:1px solid var(--border); border-radius:16px; padding:6px 13px;
+          font-size:12px; cursor:pointer; color:var(--text); }
+  .chip:hover { border-color:var(--accent); }
+
+  .section { margin-bottom:26px; }
+  .section h2 { font-size:17px; border-left:3px solid var(--accent); padding-left:10px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px; }
+  .card h3 { margin:0 0 4px; font-size:15px; }
+  .card .tag { font-size:11px; color:var(--muted); }
+  .card p { font-size:12px; color:var(--muted); margin:8px 0; }
+  .card a { color:var(--accent); font-size:13px; text-decoration:none; display:inline-block; margin-right:12px; }
+  .card a:hover { text-decoration:underline; }
+  .note { font-size:12px; color:var(--muted); background:var(--panel); border:1px solid var(--border);
+          border-radius:8px; padding:12px; margin-top:8px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🎬 吉他媒体资源浏览器</h1>
+  <p>一个工具页:输入你想找的内容,一键在各平台搜索示范/教学/演出/伴奏。链接永不失效。</p>
+</header>
+
+<div class="container">
+
+  <!-- 智能搜索 -->
+  <div class="search-box">
+    <h2>🔎 智能搜索(输入关键词,选平台直达)</h2>
+    <div class="row">
+      <input type="text" id="kw" placeholder="例如:大横按 / string bending / 某首歌名 / Tommy Emmanuel">
+      <select id="suffix">
+        <option value="">— 意图(可选)—</option>
+        <option value="tutorial 教学">教学 tutorial</option>
+        <option value="lesson 示范">技巧示范 lesson</option>
+        <option value="live 现场">现场演出 live</option>
+        <option value="backing track 伴奏">伴奏 backing track</option>
+        <option value="cover 演奏">演奏 cover</option>
+        <option value="slow 慢速">慢速讲解 slow</option>
+      </select>
+    </div>
+    <div class="platform-btns">
+      <a class="pbtn" id="yt" target="_blank" rel="noopener">▶ YouTube</a>
+      <a class="pbtn bili" id="bili" target="_blank" rel="noopener">📺 哔哩哔哩</a>
+      <a class="pbtn sp" id="sp" target="_blank" rel="noopener">🎧 Spotify</a>
+      <a class="pbtn secondary" id="ug" target="_blank" rel="noopener">🎼 找谱(UG)</a>
+      <a class="pbtn secondary" id="ss" target="_blank" rel="noopener">🎵 找谱(Songsterr)</a>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <!-- 教学频道 -->
+  <div class="section">
+    <h2>🎓 教学示范频道</h2>
+    <div class="cards" id="channels"></div>
+  </div>
+
+  <!-- 演出 -->
+  <div class="section">
+    <h2>🎤 演出 / 现场</h2>
+    <div class="cards" id="lives"></div>
+  </div>
+
+  <!-- 跟练 -->
+  <div class="section">
+    <h2>🎸 跟练 / 伴奏 / 工具</h2>
+    <div class="cards" id="tools"></div>
+  </div>
+
+  <div class="note">
+    ⚠️ 外部内容由第三方平台托管,具体视频可能变更或下架,但上方"智能搜索"链接始终有效。
+    请尊重创作者版权。更完整的说明见 <code>13-资源与社区/媒体资源中心.md</code>。
+  </div>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+function buildSearchLinks() {
+  const kw = $("kw").value.trim();
+  const suffix = $("suffix").value.split(" ")[0]; // 取英文部分用于搜索
+  const q = encodeURIComponent((kw + " " + (suffix || "")).trim());
+  const qZh = encodeURIComponent((kw + " " + ($("suffix").value.split(" ")[1] || "")).trim());
+  $("yt").href   = "https://www.youtube.com/results?search_query=" + q;
+  $("bili").href = "https://search.bilibili.com/all?keyword=" + qZh;
+  $("sp").href   = "https://open.spotify.com/search/" + encodeURIComponent(kw);
+  $("ug").href   = "https://www.ultimate-guitar.com/search.php?search_type=title&value=" + encodeURIComponent(kw);
+  $("ss").href   = "https://www.songsterr.com/?pattern=" + encodeURIComponent(kw);
+}
+["kw","suffix"].forEach(id => $(id).addEventListener("input", buildSearchLinks));
+
+// 快捷关键词
+const CHIPS = ["持琴姿势","调音","换和弦","大横按","扫弦","指弹","推弦","揉弦",
+               "五声音阶","即兴 blues","扫拨","点弦","Tommy Emmanuel","12 bar blues backing track"];
+CHIPS.forEach(c => {
+  const el = document.createElement("span");
+  el.className = "chip"; el.textContent = c;
+  el.onclick = () => { $("kw").value = c; buildSearchLinks(); };
+  $("chips").appendChild(el);
+});
+
+// 数据:教学频道
+const CHANNELS = [
+  ["JustinGuitar","体系最全免费课程,零基础到进阶","零基础首推",
+    [["官网","https://justinguitar.com/"],["YouTube","https://www.youtube.com/@JustinGuitar"]]],
+  ["Marty Music","海量流行歌曲完整教学、riff 拆解","学具体歌曲",
+    [["YouTube","https://www.youtube.com/@MartyMusic"]]],
+  ["Paul Davids","制作精良,音色/技巧/乐理讲得透","进阶提升",
+    [["官网","https://pauldavidsguitar.com/"],["YouTube","https://www.youtube.com/@PaulDavids"]]],
+  ["Andy Guitar","友好的初学者慢节奏路线","零基础",
+    [["YouTube","https://www.youtube.com/@andyguitar"]]],
+  ["Signals Music Studio","乐理与即兴讲解清晰实用","学乐理/写歌",
+    [["YouTube","https://www.youtube.com/@SignalsMusicStudio"]]],
+  ["GuitarLessons365","海量歌曲与 solo 逐段教学","扒歌学solo",
+    [["YouTube","https://www.youtube.com/@GuitarLessons365Song"]]],
+  ["哔哩哔哩(中文)","搜'吉他教学/指弹教学'有大量中文UP主","中文学习",
+    [["B站搜索","https://search.bilibili.com/all?keyword=吉他教学"]]],
+];
+
+// 数据:演出
+const LIVES = [
+  ["Tiny Desk (NPR Music)","小型原声现场,音色细节清晰","原声/各风格",
+    [["频道","https://www.youtube.com/@nprmusic"],["搜索","https://www.youtube.com/results?search_query=Tiny+Desk+Concert+guitar"]]],
+  ["Crossroads Guitar Festival","Clapton 发起,名家云集","布鲁斯/摇滚",
+    [["搜索","https://www.youtube.com/results?search_query=Crossroads+Guitar+Festival"]]],
+  ["Montreux Jazz Festival","传奇爵士/摇滚现场","爵士/摇滚",
+    [["官网","https://www.montreuxjazzfestival.com/"],["搜索","https://www.youtube.com/results?search_query=Montreux+Jazz+Festival+guitar"]]],
+  ["Mahogany Sessions","高质量原声/民谣现场","民谣/原声",
+    [["搜索","https://www.youtube.com/results?search_query=Mahogany+Session+acoustic"]]],
+];
+
+// 数据:工具
+const TOOLS = [
+  ["Quist 伴奏","各调各风格海量免费伴奏","Backing track",
+    [["官网","https://quistorama.com/jamtracks"],["YouTube","https://www.youtube.com/@Quist"]]],
+  ["Elevated Jam Tracks","含免费 TAB + 伴奏","Backing+TAB",
+    [["官网","https://elevatedjamtracks.com/"]]],
+  ["Moises","变速不变调 + 人声/乐器分轨","扒带/慢练",
+    [["官网","https://moises.ai/"]]],
+  ["Songsterr","带播放的交互 TAB,可变速循环","找谱/跟练",
+    [["官网","https://www.songsterr.com/"]]],
+  ["Ultimate Guitar","最大和弦/TAB 库","找谱",
+    [["官网","https://www.ultimate-guitar.com/"]]],
+  ["本仓库练习台","看谱+播放+变速+节拍器+循环","入门跟练",
+    [["打开","./练习台.html"]]],
+];
+
+function renderCards(containerId, data) {
+  const c = $(containerId);
+  data.forEach(([name, desc, tag, links]) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    let html = `<h3>${name}</h3><span class="tag">${tag}</span><p>${desc}</p>`;
+    html += links.map(([t,u]) => `<a href="${u}" target="_blank" rel="noopener">${t} →</a>`).join("");
+    card.innerHTML = html;
+    c.appendChild(card);
+  });
+}
+
+window.addEventListener("load", () => {
+  buildSearchLinks();
+  renderCards("channels", CHANNELS);
+  renderCards("lives", LIVES);
+  renderCards("tools", TOOLS);
+});
+</script>
+</body>
+</html>

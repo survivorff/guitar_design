@@ -27,6 +27,10 @@
   都用 SVG 绘制并嵌入对应文档(见 `assets/images/`,由 `assets/scripts/generate_diagrams.py` 生成)。
 - **交互练习台**:[`interactive/练习台.html`](./interactive/练习台.html) —— 用浏览器打开即可
   **看谱 + 播放 + 变速 + 节拍器 + 循环**,跟着练入门曲目。
+- **媒体资源浏览器**:[`interactive/媒体资源浏览器.html`](./interactive/媒体资源浏览器.html) —— 一键搜索
+  示范/教学/演出/伴奏视频,链接永不失效。
+- **媒体资源中心**:[`13-资源与社区/媒体资源中心.md`](./13-资源与社区/媒体资源中心.md) ——
+  精选教学频道、必听演奏、现场演出、跟练资源,大量可点击链接。
 - **专业软件指南**:[`13-资源与社区/乐谱与练习软件.md`](./13-资源与社区/乐谱与练习软件.md) ——
   alphaTex 记谱、Guitar Pro / Songsterr / MuseScore 等工具与练习工作流。
 
